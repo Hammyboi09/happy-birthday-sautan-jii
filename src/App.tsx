@@ -287,28 +287,28 @@ const BirthdayApp: React.FC = () => {
             
             {/* Step 0: Welcome */}
             {currentStep === 0 && (
-              <div className="text-center animate-fadeIn">
+              <div className="text-center animate-fadeIn px-4">
                 <div className="mb-12">
                   <div className="relative inline-block">
                     <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full blur-xl opacity-30 animate-pulse"></div>
-                    <Cake className="w-20 h-20 mx-auto text-pink-500 relative z-10" />
+                    <Cake className="w-16 h-16 sm:w-20 sm:h-20 mx-auto text-pink-500 relative z-10" />
                   </div>
                 </div>
-                <h1 className="text-5xl md:text-7xl font-black text-slate-800 mb-6 leading-tight">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-slate-800 mb-6 leading-tight px-2">
                   Happy Birthday
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 mt-2">
                     Beautiful Soul
                   </span>
                 </h1>
-                <p className="text-xl md:text-2xl text-slate-600 mb-12 font-light max-w-2xl mx-auto leading-relaxed">
+                <p className="text-lg sm:text-xl md:text-2xl text-slate-600 mb-8 sm:mb-12 font-light max-w-2xl mx-auto leading-relaxed px-4">
                   Today we celebrate you and all the joy you bring to the world. 
                   Ready for something special?
                 </p>
-                <div className="flex justify-center space-x-6 mb-12">
+                <div className="flex justify-center space-x-4 sm:space-x-6 mb-8 sm:mb-12">
                   {[...Array(5)].map((_, i) => (
                     <div 
                       key={i} 
-                      className="w-4 h-8 rounded-full animate-bounce" 
+                      className="w-3 h-6 sm:w-4 sm:h-8 rounded-full animate-bounce" 
                       style={{ 
                         backgroundColor: modernColors[i],
                         animationDelay: `${i * 0.1}s` 
@@ -318,7 +318,7 @@ const BirthdayApp: React.FC = () => {
                 </div>
                 <button
                   onClick={nextStep}
-                  className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-10 py-4 rounded-2xl text-lg font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer"
+                  className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 sm:px-10 py-3 sm:py-4 rounded-2xl text-base sm:text-lg font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer touch-manipulation"
                 >
                   Begin the Journey
                 </button>
@@ -327,43 +327,46 @@ const BirthdayApp: React.FC = () => {
 
             {/* Step 1: Surprise Reveal */}
             {currentStep === 1 && (
-              <div className="text-center animate-fadeIn">
+              <div className="text-center animate-fadeIn px-4">
                 <div className="mb-12 relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-full blur-2xl opacity-20 animate-pulse"></div>
-                  <PartyPopper className="w-24 h-24 mx-auto text-yellow-500 animate-bounce relative z-10" />
+                  <PartyPopper className="w-20 h-20 sm:w-24 sm:h-24 mx-auto text-yellow-500 animate-bounce relative z-10" />
                 </div>
-                <h2 className="text-4xl md:text-6xl font-bold text-slate-800 mb-8">
+                <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-800 mb-6 sm:mb-8">
                   This is Your Day
                 </h2>
-                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 mb-8 max-w-2xl mx-auto shadow-xl border border-white/20">
-                  <p className="text-xl text-slate-700 mb-6 leading-relaxed">
+                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 max-w-2xl mx-auto shadow-xl border border-white/20">
+                  <p className="text-lg sm:text-xl text-slate-700 mb-4 sm:mb-6 leading-relaxed">
                     Every year, you grow more amazing. Today isn't just about getting older—
                     it's about celebrating the incredible person you've become.
                   </p>
-                  <p className="text-lg text-slate-600 mb-8">
+                  <p className="text-base sm:text-lg text-slate-600 mb-6 sm:mb-8">
                     We've prepared something interactive and fun, just for you. 
                     Let's make this birthday unforgettable!
                   </p>
                   
                   {/* Path Selection Section */}
                   <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-slate-800 mb-2">
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2">
                       Select Your Journey
                     </h3>
-                    <p className="text-slate-600 mb-6">
+                    <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6">
                       Pick one Only
                     </p>
                     
-                    <div className="flex justify-center space-x-8 mb-4">
+                    <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 lg:space-x-8 mb-4">
                       {paths.map((path, index) => (
                         <Tooltip key={path.id} text={path.tooltip}>
                           <button
                             onClick={() => handlePathSelection(path.id)}
-                            className={`bg-gradient-to-r ${path.color} ${path.hoverColor} text-white p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 cursor-pointer group relative overflow-hidden`}
+                            className={`bg-gradient-to-r ${path.color} ${path.hoverColor} text-white p-4 sm:p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300 cursor-pointer group relative overflow-hidden touch-manipulation min-w-[120px] sm:min-w-[140px]`}
                             style={{ animationDelay: `${index * 0.2}s` }}
                           >
                             <div className="relative z-10">
                               {path.icon}
+                            </div>
+                            <div className="text-xs sm:text-sm font-medium mt-2 sm:hidden">
+                              {path.title}
                             </div>
                             <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
                           </button>
@@ -371,15 +374,15 @@ const BirthdayApp: React.FC = () => {
                       ))}
                     </div>
                     
-                    <p className="text-xs text-slate-500 font-light">
-                      Each Path unlocks the hidden gates to an extraordinary realm, shaping the destiny of Saarah & Sulu’s Birthday Date like never before Choose one Wisely.
+                    <p className="text-xs sm:text-sm text-slate-500 font-light px-2">
+                      Each Path unlocks the hidden gates to an extraordinary realm, shaping the destiny of Saarah & Sulu's Birthday Date like never before Choose one Wisely.
                     </p>
                   </div>
                 </div>
                 <div className="flex justify-center space-x-4">
                   <button
                     onClick={prevStep}
-                    className="bg-white/50 backdrop-blur-sm text-slate-700 px-8 py-3 rounded-xl font-medium hover:bg-white/70 transition-all cursor-pointer border border-white/30"
+                    className="bg-white/50 backdrop-blur-sm text-slate-700 px-6 sm:px-8 py-3 rounded-xl font-medium hover:bg-white/70 transition-all cursor-pointer border border-white/30 touch-manipulation"
                   >
                     ← Back
                   </button>
@@ -389,12 +392,12 @@ const BirthdayApp: React.FC = () => {
 
             {/* Step 2: Birthday Game */}
             {currentStep === 2 && (
-              <div className="text-center animate-fadeIn">
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-8">
+              <div className="text-center animate-fadeIn px-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-6 sm:mb-8">
                   Birthday Balloon Pop
                 </h2>
-                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 mb-8 max-w-3xl mx-auto shadow-xl border border-white/20">
-                  <p className="text-lg text-slate-700 mb-8">
+                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 max-w-3xl mx-auto shadow-xl border border-white/20">
+                  <p className="text-base sm:text-lg text-slate-700 mb-6 sm:mb-8">
                     Pop as many balloons as you can in 15 seconds! Each balloon is a wish for your special day.
                   </p>
                   
@@ -405,7 +408,7 @@ const BirthdayApp: React.FC = () => {
                     {!gameActive && gameScore === 0 && (
                       <button
                         onClick={startGame}
-                        className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-8 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all cursor-pointer shadow-lg"
+                        className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all cursor-pointer shadow-lg touch-manipulation"
                       >
                         Start Game
                       </button>
@@ -418,7 +421,7 @@ const BirthdayApp: React.FC = () => {
                   </div>
 
                   {/* Game Balloons */}
-                  <div className="relative h-64 mb-8">
+                  <div className="relative h-48 sm:h-64 mb-6 sm:mb-8">
                     {[...Array(12)].map((_, i) => (
                       <button
                         key={i}
@@ -428,25 +431,25 @@ const BirthdayApp: React.FC = () => {
                           clickedBalloons.includes(i) 
                             ? 'opacity-30 scale-50' 
                             : 'hover:scale-110 animate-bounce'
-                        }`}
+                        } touch-manipulation`}
                         style={{
-                          left: `${(i % 4) * 25 + 10}%`,
+                          left: `${(i % 4) * 22 + 12}%`,
                           top: `${Math.floor(i / 4) * 33 + 10}%`,
                           backgroundColor: modernColors[i % modernColors.length],
                           animationDelay: `${i * 0.1}s`
                         }}
                       >
-                        <Balloon className="w-6 h-6 mx-auto text-white" />
+                        <Balloon className="w-4 h-4 sm:w-6 sm:h-6 mx-auto text-white" />
                       </button>
                     ))}
                   </div>
 
                   {gameScore > 0 && !gameActive && (
                     <div className="bg-gradient-to-r from-green-100 to-blue-100 rounded-2xl p-6">
-                      <div className="text-2xl text-slate-800 font-bold">
+                      <div className="text-xl sm:text-2xl text-slate-800 font-bold">
                         Fantastic! You scored {gameScore} points!
                       </div>
-                      <p className="text-slate-600 mt-2">Each balloon was a birthday wish coming true!</p>
+                      <p className="text-sm sm:text-base text-slate-600 mt-2">Each balloon was a birthday wish coming true!</p>
                     </div>
                   )}
                 </div>
@@ -454,13 +457,13 @@ const BirthdayApp: React.FC = () => {
                 <div className="flex justify-center space-x-4">
                   <button
                     onClick={prevStep}
-                    className="bg-white/50 backdrop-blur-sm text-slate-700 px-8 py-3 rounded-xl font-medium hover:bg-white/70 transition-all cursor-pointer border border-white/30"
+                    className="bg-white/50 backdrop-blur-sm text-slate-700 px-6 sm:px-8 py-3 rounded-xl font-medium hover:bg-white/70 transition-all cursor-pointer border border-white/30 touch-manipulation"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={nextStep}
-                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-10 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 cursor-pointer shadow-lg"
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 sm:px-10 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 cursor-pointer shadow-lg touch-manipulation"
                   >
                     Continue
                   </button>
@@ -470,33 +473,33 @@ const BirthdayApp: React.FC = () => {
 
             {/* Step 3: Memory Lane */}
             {currentStep === 3 && (
-              <div className="text-center animate-fadeIn">
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-8">
+              <div className="text-center animate-fadeIn px-4">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-6 sm:mb-8">
                   Celebrating You
                 </h2>
-                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 mb-8 max-w-4xl mx-auto shadow-xl border border-white/20">
-                  <p className="text-xl text-slate-700 mb-10 leading-relaxed">
+                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-6 sm:p-8 mb-6 sm:mb-8 max-w-4xl mx-auto shadow-xl border border-white/20">
+                  <p className="text-lg sm:text-xl text-slate-700 mb-8 sm:mb-10 leading-relaxed">
                     Every birthday is a milestone of beautiful moments, growth, and the impact you've made.
                   </p>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10">
                     {[
                       { icon: <Camera className="w-10 h-10" />, title: "Precious Moments", desc: "Every smile captured, every memory made", color: "from-pink-400 to-rose-400" },
                       { icon: <Heart className="w-10 h-10" />, title: "Love & Connection", desc: "The bonds that make life beautiful", color: "from-red-400 to-pink-400" },
                       { icon: <Star className="w-10 h-10" />, title: "Your Bright Light", desc: "The way you illuminate every room", color: "from-yellow-400 to-orange-400" }
                     ].map((item, i) => (
-                      <div key={i} className="bg-white/40 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/60 transition-all duration-300 border border-white/30 hover:scale-105 transform">
-                        <div className={`bg-gradient-to-r ${item.color} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white shadow-lg`}>
+                      <div key={i} className="bg-white/40 backdrop-blur-sm rounded-2xl p-4 sm:p-6 hover:bg-white/60 transition-all duration-300 border border-white/30 hover:scale-105 transform">
+                        <div className={`bg-gradient-to-r ${item.color} w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 text-white shadow-lg`}>
                           {item.icon}
                         </div>
-                        <h3 className="text-xl font-semibold text-slate-800 mb-3">{item.title}</h3>
-                        <p className="text-slate-600 leading-relaxed">{item.desc}</p>
+                        <h3 className="text-lg sm:text-xl font-semibold text-slate-800 mb-2 sm:mb-3">{item.title}</h3>
+                        <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{item.desc}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-100">
-                    <p className="text-lg text-slate-700 italic font-medium">
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-4 sm:p-6 border border-blue-100">
+                    <p className="text-base sm:text-lg text-slate-700 italic font-medium leading-relaxed">
                       "The best birthdays aren't just about the celebration—they're about recognizing 
                       the amazing person you are and the joy you bring to everyone around you."
                     </p>
@@ -506,13 +509,13 @@ const BirthdayApp: React.FC = () => {
                 <div className="flex justify-center space-x-4">
                   <button
                     onClick={prevStep}
-                    className="bg-white/50 backdrop-blur-sm text-slate-700 px-8 py-3 rounded-xl font-medium hover:bg-white/70 transition-all cursor-pointer border border-white/30"
+                    className="bg-white/50 backdrop-blur-sm text-slate-700 px-6 sm:px-8 py-3 rounded-xl font-medium hover:bg-white/70 transition-all cursor-pointer border border-white/30 touch-manipulation"
                   >
                     ← Back
                   </button>
                   <button
                     onClick={nextStep}
-                    className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-10 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 cursor-pointer shadow-lg"
+                    className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-8 sm:px-10 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 cursor-pointer shadow-lg touch-manipulation"
                   >
                     Grand Finale
                   </button>
@@ -522,35 +525,35 @@ const BirthdayApp: React.FC = () => {
 
             {/* Step 4: Final Celebration */}
             {currentStep === 4 && (
-              <div className="text-center animate-fadeIn">
+              <div className="text-center animate-fadeIn px-4">
                 <div className="mb-12">
                   <div className="relative inline-block">
                     <div className="absolute inset-0 bg-gradient-to-r from-pink-400 via-purple-500 to-blue-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
-                    <Sparkles className="w-24 h-24 mx-auto text-purple-500 animate-spin-slow relative z-10" />
+                    <Sparkles className="w-20 h-20 sm:w-24 sm:h-24 mx-auto text-purple-500 animate-spin-slow relative z-10" />
                   </div>
                 </div>
                 
-                <h2 className="text-4xl md:text-6xl font-bold text-slate-800 mb-8">
+                <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-800 mb-6 sm:mb-8">
                   You Are
-                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-gradient-x">
+                  <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-gradient-x mt-2">
                     Absolutely Amazing
                   </span>
                 </h2>
                 
-                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-10 mb-8 max-w-3xl mx-auto shadow-xl border border-white/20">
-                  <p className="text-2xl text-slate-700 mb-6 font-light leading-relaxed">
+                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-6 sm:p-10 mb-6 sm:mb-8 max-w-3xl mx-auto shadow-xl border border-white/20">
+                  <p className="text-xl sm:text-2xl text-slate-700 mb-4 sm:mb-6 font-light leading-relaxed">
                     Thank you for being exactly who you are.
                   </p>
-                  <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                  <p className="text-base sm:text-lg text-slate-600 mb-6 sm:mb-8 leading-relaxed">
                     Your birthday isn't just a celebration of another year—it's a celebration of your kindness, 
                     your laughter, your dreams, and all the ways you make the world brighter just by being in it.
                   </p>
                   
-                  <div className="flex justify-center space-x-4 mb-8">
+                  <div className="flex justify-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
                     {modernColors.map((color, i) => (
                       <div 
                         key={i} 
-                        className="w-3 h-12 rounded-full animate-bounce shadow-lg" 
+                        className="w-2 h-8 sm:w-3 sm:h-12 rounded-full animate-bounce shadow-lg" 
                         style={{ 
                           backgroundColor: color,
                           animationDelay: `${i * 0.1}s` 
@@ -559,8 +562,8 @@ const BirthdayApp: React.FC = () => {
                     ))}
                   </div>
                   
-                  <div className="bg-gradient-to-r from-yellow-50 to-pink-50 rounded-2xl p-6 border border-yellow-100">
-                    <p className="text-2xl font-semibold text-slate-800">
+                  <div className="bg-gradient-to-r from-yellow-50 to-pink-50 rounded-2xl p-4 sm:p-6 border border-yellow-100">
+                    <p className="text-lg sm:text-2xl font-semibold text-slate-800">
                       Make a wish and let it come true! ✨
                     </p>
                   </div>
@@ -569,7 +572,7 @@ const BirthdayApp: React.FC = () => {
                 <div className="flex justify-center space-x-4 mb-8">
                   <button
                     onClick={prevStep}
-                    className="bg-white/50 backdrop-blur-sm text-slate-700 px-8 py-3 rounded-xl font-medium hover:bg-white/70 transition-all cursor-pointer border border-white/30"
+                    className="bg-white/50 backdrop-blur-sm text-slate-700 px-6 sm:px-8 py-3 rounded-xl font-medium hover:bg-white/70 transition-all cursor-pointer border border-white/30 touch-manipulation"
                   >
                     ← Back
                   </button>
@@ -578,13 +581,13 @@ const BirthdayApp: React.FC = () => {
                       generateConfetti();
                       playSound(600, 0.5);
                     }}
-                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-10 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg cursor-pointer"
+                    className="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 sm:px-10 py-3 rounded-xl font-semibold hover:scale-105 transform transition-all duration-300 shadow-lg cursor-pointer touch-manipulation"
                   >
                     Celebrate! 🎉
                   </button>
                 </div>
 
-                <div className="text-3xl space-x-2">
+                <div className="text-2xl sm:text-3xl space-x-2">
                   <span className="inline-block animate-bounce">🎈</span>
                   <span className="inline-block animate-bounce" style={{ animationDelay: '0.1s' }}>🎂</span>
                   <span className="inline-block animate-bounce" style={{ animationDelay: '0.2s' }}>🎁</span>
@@ -598,21 +601,21 @@ const BirthdayApp: React.FC = () => {
 
         {/* Modern Step Indicator */}
         <div className="p-6">
-          <div className="flex justify-center space-x-3 mb-4">
+          <div className="flex justify-center space-x-2 sm:space-x-3 mb-4">
             {steps.map((step, index) => (
               <div
                 key={index}
-                className={`h-2 rounded-full transition-all duration-500 ${
+                className={`h-1.5 sm:h-2 rounded-full transition-all duration-500 ${
                   index === currentStep 
-                    ? 'w-8 bg-gradient-to-r from-pink-500 to-purple-500' 
+                    ? 'w-6 sm:w-8 bg-gradient-to-r from-pink-500 to-purple-500' 
                     : index < currentStep 
-                      ? 'w-6 bg-green-400' 
-                      : 'w-2 bg-slate-300'
+                      ? 'w-4 sm:w-6 bg-green-400' 
+                      : 'w-1.5 sm:w-2 bg-slate-300'
                 }`}
               />
             ))}
           </div>
-          <div className="text-center text-slate-600 text-sm font-medium">
+          <div className="text-center text-slate-600 text-xs sm:text-sm font-medium px-4">
             {steps[currentStep]} • {currentStep + 1} of {steps.length}
           </div>
         </div>

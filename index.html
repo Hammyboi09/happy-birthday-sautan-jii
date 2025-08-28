@@ -3,13 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#ff6b9d" />
     <title>🎉 Ultimate Birthday Surprise Experience! 🎂</title>
     <meta name="description" content="An ultra-modern, interactive birthday surprise with 3D animations, challenging games, and aesthetic vibes!" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+      /* Prevent zoom and improve mobile experience */
+      * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+      }
+      
+      html, body {
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
       /* Ultra-modern loading screen */
       .loading-screen {
         position: fixed;
@@ -17,6 +34,7 @@
         left: 0;
         width: 100vw;
         height: 100vh;
+        height: 100dvh; /* Dynamic viewport height for mobile */
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         display: flex;
         align-items: center;
@@ -28,10 +46,11 @@
       .loading-content {
         text-align: center;
         color: white;
+        padding: 1rem;
       }
       
       .loading-text {
-        font-size: 2.5rem;
+        font-size: clamp(1.5rem, 5vw, 2.5rem);
         font-weight: 800;
         margin-bottom: 2rem;
         background: linear-gradient(45deg, #ff6b9d, #a8e6cf, #ffd93d);
@@ -39,10 +58,11 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: gradient-shift 2s ease-in-out infinite;
+        line-height: 1.2;
       }
       
       .loading-bar {
-        width: 300px;
+        width: min(300px, 80vw);
         height: 6px;
         background: rgba(255, 255, 255, 0.2);
         border-radius: 3px;
@@ -75,29 +95,46 @@
       }
       
       /* Cursor enhancement */
-      * {
-        cursor: none;
+      @media (hover: hover) and (pointer: fine) {
+        * {
+          cursor: none;
+        }
+        
+        button, .cursor-pointer, input {
+          cursor: none;
+        }
+        
+        .custom-cursor {
+          position: fixed;
+          width: 20px;
+          height: 20px;
+          background: radial-gradient(circle, rgba(255,107,157,0.8) 0%, rgba(168,230,207,0.6) 100%);
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 9998;
+          mix-blend-mode: difference;
+          transition: transform 0.1s ease-out;
+        }
+        
+        .custom-cursor.hover {
+          transform: scale(1.5);
+          background: radial-gradient(circle, rgba(168,230,207,0.9) 0%, rgba(255,107,157,0.7) 100%);
+        }
       }
       
-      button, .cursor-pointer, input {
-        cursor: none;
+      /* Hide custom cursor on touch devices */
+      @media (hover: none) and (pointer: coarse) {
+        .custom-cursor {
+          display: none !important;
+        }
       }
       
-      .custom-cursor {
-        position: fixed;
-        width: 20px;
-        height: 20px;
-        background: radial-gradient(circle, rgba(255,107,157,0.8) 0%, rgba(168,230,207,0.6) 100%);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9998;
-        mix-blend-mode: difference;
-        transition: transform 0.1s ease-out;
-      }
-      
-      .custom-cursor.hover {
-        transform: scale(1.5);
-        background: radial-gradient(circle, rgba(168,230,207,0.9) 0%, rgba(255,107,157,0.7) 100%);
+      /* Mobile-specific loading text */
+      @media (max-width: 768px) {
+        .loading-content p {
+          font-size: 1rem;
+          margin-top: 0.5rem;
+        }
       }
     </style>
   </head>
@@ -119,38 +156,49 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
-      // Enhanced cursor tracking
+      // Enhanced cursor tracking - only for non-touch devices
       const cursor = document.getElementById('cursor');
-      let mouseX = 0, mouseY = 0;
-      let cursorX = 0, cursorY = 0;
       
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-      
-      // Smooth cursor animation
-      function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.1;
-        cursorY += (mouseY - cursorY) * 0.1;
-        cursor.style.left = cursorX - 10 + 'px';
-        cursor.style.top = cursorY - 10 + 'px';
-        requestAnimationFrame(animateCursor);
+      // Check if device supports hover (non-touch device)
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+        });
+        
+        // Smooth cursor animation
+        function animateCursor() {
+          cursorX += (mouseX - cursorX) * 0.1;
+          cursorY += (mouseY - cursorY) * 0.1;
+          if (cursor) {
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+          }
+          requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        
+        // Cursor hover effects
+        document.addEventListener('mouseover', (e) => {
+          if (e.target.matches('button, .cursor-pointer, input, [role="button"]')) {
+            cursor?.classList.add('hover');
+          }
+        });
+        
+        document.addEventListener('mouseout', (e) => {
+          if (e.target.matches('button, .cursor-pointer, input, [role="button"]')) {
+            cursor?.classList.remove('hover');
+          }
+        });
+      } else {
+        // Hide cursor on touch devices
+        if (cursor) {
+          cursor.style.display = 'none';
+        }
       }
-      animateCursor();
-      
-      // Cursor hover effects
-      document.addEventListener('mouseover', (e) => {
-        if (e.target.matches('button, .cursor-pointer, input, [role="button"]')) {
-          cursor.classList.add('hover');
-        }
-      });
-      
-      document.addEventListener('mouseout', (e) => {
-        if (e.target.matches('button, .cursor-pointer, input, [role="button"]')) {
-          cursor.classList.remove('hover');
-        }
-      });
       
       // Hide loading screen
       window.addEventListener('load', () => {
@@ -164,6 +212,29 @@
       
       // Prevent right-click context menu for cleaner experience
       document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+      });
+      
+      // Prevent zoom on double tap (iOS)
+      let lastTouchEnd = 0;
+      document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, false);
+      
+      // Prevent pinch zoom
+      document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+      });
+      
+      document.addEventListener('gesturechange', function (e) {
+        e.preventDefault();
+      });
+      
+      document.addEventListener('gestureend', function (e) {
         e.preventDefault();
       });
       
@@ -189,8 +260,22 @@
       };
       
       // Add click sound effects
-      document.addEventListener('click', () => {
-        playSound(800, 0.1);
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        document.addEventListener('click', () => {
+          playSound(800, 0.1);
+        });
+      }
+      
+      // Handle viewport height changes on mobile (address bar hiding)
+      function setViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+      }
+      
+      setViewportHeight();
+      window.addEventListener('resize', setViewportHeight);
+      window.addEventListener('orientationchange', () => {
+        setTimeout(setViewportHeight, 100);
       });
     </script>
   </body>
